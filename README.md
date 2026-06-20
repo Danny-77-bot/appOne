@@ -1,17 +1,40 @@
 # appOne
+# Pokédex App
 
-This project is part of my React Native learning journey. I am building small applications and practicing concepts to improve my mobile development skills.
+A React Native application built with Expo that displays Pokémon data from the PokéAPI.
 
-## Tech Stack
+## Features
 
-- React Native
-- Expo
-- JavaScript
-- Expo Router
+* Display Pokémon list
+* Fetch data from PokéAPI
+* Display Pokémon images
+* Responsive mobile interface
 
-## Get Started
+## Technologies Used
 
-### Install Dependencies
+* React Native
+* Expo
+* JavaScript / TypeScript
+* PokéAPI
+
+## Installation
 
 ```bash
+npm install
+npx expo start
+```
+
+## What I Learned
+
+* React Native components
+* Styling in React Native
+* API fetching
+* Working with lists using FlatList
+* Mobile app development with Expo
+
+## Author
+
+Daniel Melaku Etana
+
+
 
