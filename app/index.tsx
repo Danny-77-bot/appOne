@@ -60,8 +60,9 @@ const detailedPokemon = await Promise.all(
              {pokemon.map((pokemon)=>{
                  return(
                     <View key={pokemon.name} style={{margin:10, alignItems:"center"}}>
-                        <Text>{pokemon.name}</Text>
-                        <Image source={{uri:pokemon.image}} style={{width:100, height:100}} />
+                        <Text style={{fontSize: 18, fontWeight: "bold" }}>{pokemon.name}</Text>
+                        <Image 
+                        source={{uri:pokemon.image}} style={{width:200, height:200}} />
                     </View>
                  )
              })}
