@@ -1,77 +1,92 @@
-# Pokémon List App (React Native)
+# Pokémon Explorer App
 
-## 📱 Project Description
+## 📱 Description
 
-This is a simple React Native application that fetches Pokémon data from the public PokeAPI and displays the list of Pokémon names using a FlatList.
-
----
+A React Native application that fetches Pokémon data from the PokeAPI and displays each Pokémon's name and image. The app uses asynchronous API requests to retrieve detailed Pokémon information and renders the results in a scrollable list.
 
 ## 🚀 Features
 
-- Fetch data from a public API (PokeAPI)
-- Display data using React Native FlatList
-- Use of React Hooks (useState, useEffect)
-- Render dynamic list of Pokémon names
-- Console logging to track state changes
+* Fetch Pokémon data from PokeAPI
+* Fetch detailed information for each Pokémon
+* Display Pokémon names and images
+* Use React Hooks (`useState` and `useEffect`)
+* Use TypeScript interfaces for type safety
+* Render dynamic content using `ScrollView`
+* Handle asynchronous requests with `async/await`
+* Use `Promise.all()` to fetch multiple Pokémon details in parallel
+* Log state updates for debugging
 
----
+## 🛠 Technologies Used
 
-## 🛠️ Tech Stack
+* React Native
+* TypeScript
+* JavaScript Fetch API
+* PokeAPI
 
-- React Native
-- JavaScript (ES6+)
-- Fetch API
+## 📚 What I Learned
 
----
+### React Native
 
-## 🧠 What I Learned
+* Creating functional components
+* Using `View`, `Text`, `Image`, and `ScrollView`
+* Styling React Native components
 
-- How to fetch data from an external API in React Native
-- How to manage state using `useState`
-- How to use `useEffect` for side effects
-- How to render lists using `FlatList`
-- How React re-renders when state changes
-- How to debug state using `console.log`
+### React Hooks
 
----
+* Managing state with `useState`
+* Running side effects with `useEffect`
+* Tracking state updates
 
-## 📦 API Used
+### API Integration
 
-- PokeAPI: https://pokeapi.co/api/v2/pokemon/?limit=20
+* Making HTTP requests using `fetch`
+* Parsing JSON responses
+* Working with nested API data
 
-This API returns a list of Pokémon with their names and URLs.
+### Asynchronous JavaScript
 
----
+* Using `async/await`
+* Error handling with `try/catch`
+* Fetching multiple resources using `Promise.all`
 
-## 📋 Project Structure
+### TypeScript
 
+* Creating interfaces
+* Typing component state
+* Improving code readability and safety
 
+## 📡 API
 
----
-Index.js (Main Screen)
-## ▶️ How It Works
+PokeAPI
 
-1. When the app starts, `useEffect` runs once.
-2. It calls `fetchPokemon()` function.
-3. Data is fetched from PokeAPI.
-4. Only `results` (Pokémon list) is saved in state.
-5. FlatList renders each Pokémon name.
-6. State changes are logged in the console.
+https://pokeapi.co/
 
----
+Endpoint used:
 
-## 🔮 Future Improvements
+https://pokeapi.co/api/v2/pokemon
 
-- Add Pokémon images
-- Add loading indicator
-- Add search functionality
-- Add error handling for API failures
+## 🔄 Application Flow
 
----
+1. Component mounts.
+2. `useEffect` calls `fetchPokemon()`.
+3. Pokémon list is fetched from PokeAPI.
+4. Additional details for each Pokémon are fetched in parallel.
+5. Pokémon names and images are stored in state.
+6. The UI re-renders and displays the data.
+
+## 🎯 Future Improvements
+
+* Add loading indicator
+* Add search functionality
+* Add pagination
+* Display Pokémon abilities and types
+* Replace `ScrollView` with `FlatList`
+* Add navigation to a Pokémon details screen
+* Improve UI design
 
 ## 📸 Output
 
-A simple list of Pokémon names displayed on the screen.
+The application displays a scrollable list of Pokémon cards containing:
 
-
-
+* Pokémon Name
+* Pokémon Image
