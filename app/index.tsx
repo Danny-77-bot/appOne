@@ -1,9 +1,12 @@
 
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
-
+interface Pokemon {
+  name: string;
+  url: string;
+}
 export default function Index() {
-  const [pokemonData,setPokemonData]=useState([]);
+  const [pokemonData,setPokemonData]=useState<Pokemon[]>([]);
 useEffect (()=>{
      fetchPokemon();  
 },[])
@@ -20,7 +23,7 @@ useEffect (()=>{
   }
 
 
-      const renderItem = ({ item }) => (
+      const renderItem = ({ item }:{item:Pokemon }) => (
         <View style={{ padding: 10 }}>
           <Text>{item.name}</Text>
         </View>
