@@ -1,6 +1,30 @@
-import { Text, View } from "react-native";
+
+import { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
 
 export default function Index() {
+  const [pokemonData,setPokemonData]=useState([]);
+useEffect (()=>{
+     fetchPokemon();  
+},[])
+ 
+ 
+useEffect (()=>{
+    console.log(pokemonData)
+},[pokemonData])
+
+  async function fetchPokemon () {
+    const response= await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20");
+    const data=await response.json();
+      return setPokemonData(data.results);
+  }
+
+
+      const renderItem = ({ item }) => (
+        <View style={{ padding: 10 }}>
+          <Text>{item.name}</Text>
+        </View>
+      );
   return (
     <View
       style={{
@@ -9,7 +33,13 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>pokemon</Text>
+        <FlatList
+        data={pokemonData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.name}
+     
+        />
     </View>
   );
 }
