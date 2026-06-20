@@ -47,3 +47,31 @@ This API returns a list of Pokémon with their names and URLs.
 
 
 
+---
+Index.js (Main Screen)
+## ▶️ How It Works
+
+1. When the app starts, `useEffect` runs once.
+2. It calls `fetchPokemon()` function.
+3. Data is fetched from PokeAPI.
+4. Only `results` (Pokémon list) is saved in state.
+5. FlatList renders each Pokémon name.
+6. State changes are logged in the console.
+
+---
+
+## 🔮 Future Improvements
+
+- Add Pokémon images
+- Add loading indicator
+- Add search functionality
+- Add error handling for API failures
+
+---
+
+## 📸 Output
+
+A simple list of Pokémon names displayed on the screen.
+
+
+
