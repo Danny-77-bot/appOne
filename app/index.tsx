@@ -1,33 +1,22 @@
 
+
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-interface Pokemon {
-  name: string;
-  url: string;
-}
+import { ScrollView, Text, View } from "react-native";
+
+
 export default function Index() {
-  const [pokemonData,setPokemonData]=useState<Pokemon[]>([]);
-useEffect (()=>{
-     fetchPokemon();  
+
+  const [pokemon, setPokemon] = useState([]);
+useEffect(()=>{
+    fectchPokemon();
 },[])
- 
- 
-useEffect (()=>{
-    console.log(pokemonData)
-},[pokemonData])
 
-  async function fetchPokemon () {
-    const response= await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20");
+  async function fectchPokemon() {
+    const response=await fetch("https://pokeapi.co/api/v2/pokemon");
     const data=await response.json();
-      return setPokemonData(data.results);
-  }
+     setPokemon(data.results);
+   }
 
-
-      const renderItem = ({ item }:{item:Pokemon }) => (
-        <View style={{ padding: 10 }}>
-          <Text>{item.name}</Text>
-        </View>
-      );
   return (
     <View
       style={{
@@ -37,12 +26,13 @@ useEffect (()=>{
       }}
     >
       <Text>pokemon</Text>
-        <FlatList
-        data={pokemonData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.name}
-     
-        />
+         <ScrollView>
+             {pokemon.map((pokemon)=>{
+                 return(
+                     <Text key={pokemon.name}>{pokemon.name}</Text>
+                 )
+             })}
+         </ScrollView>
     </View>
   );
 }
