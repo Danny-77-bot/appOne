@@ -1,7 +1,7 @@
 
 
 import { useEffect, useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 
 interface Pokemon {
   name:string,
@@ -56,17 +56,37 @@ const detailedPokemon = await Promise.all(
       }}
     >
       <Text style={{margin: 10, fontSize: 24, fontWeight: "bold" }}>pokemon</Text>
-         <ScrollView>
-             {pokemon.map((pokemon)=>{
-                 return(
-                    <View key={pokemon.name} style={{margin:10, alignItems:"center"}}>
-                        <Text style={{fontSize: 18, fontWeight: "bold" }}>{pokemon.name}</Text>
-                        <Image 
-                        source={{uri:pokemon.image}} style={{width:200, height:200}} />
-                    </View>
-                 )
-             })}
-         </ScrollView>
+        
+        <FlatList
+  data={pokemon}
+  keyExtractor={(item) => item.name}
+    showsVerticalScrollIndicator={false}
+  renderItem={({ item }) => (
+    <View
+      style={{
+        margin: 10,
+        alignItems: "center",
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "bold",
+        }}
+      >
+        {item.name}
+      </Text>
+
+      <Image
+        source={{ uri: item.image }}
+        style={{
+          width: 200,
+          height: 200,
+        }}
+      />
+    </View>
+  )}
+/>
     </View>
   );
 }
