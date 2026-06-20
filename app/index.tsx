@@ -55,7 +55,7 @@ const detailedPokemon = await Promise.all(
         alignItems: "center",
       }}
     >
-      <Text>pokemon</Text>
+      <Text style={{margin: 10, fontSize: 24, fontWeight: "bold" }}>pokemon</Text>
          <ScrollView>
              {pokemon.map((pokemon)=>{
                  return(
