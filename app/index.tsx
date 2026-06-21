@@ -28,20 +28,22 @@ useEffect(()=>{
       const response = await fetch("https://pokeapi.co/api/v2/pokemon");
       const data = await response.json();
 
-//fetch detailed info for each pokemon in parallel
-const detailedPokemon = await Promise.all(
+    //fetch detailed info for each pokemon in parallel
+ const detailedPokemon = await Promise.all(
   data.results.map(async (pokemon: any) => {
     const res = await fetch(pokemon.url);
     const details = await res.json();
+
     return {
       name: pokemon.name,
       image: details.sprites.front_default,
-     };
+    };
   })
 );
 
+setPokemon(detailedPokemon);
 
-      setPokemon(detailedPokemon);
+     
     } catch (error) {
       console.error("Error fetching pokemon:", error);
     }
