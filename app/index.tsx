@@ -4,12 +4,13 @@ import {
   Image,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 
 interface Pokemon {
   name: string;
   image: string;
+  imageBack: string;
 }
 
 export default function Index() {
@@ -34,6 +35,7 @@ export default function Index() {
           return {
             name: pokemon.name,
             image: details.sprites.front_default,
+            imageBack: details.sprites.back_default,
           };
         })
       );
@@ -58,6 +60,10 @@ export default function Index() {
             <View style={styles.imageContainer}>
               <Image
                 source={{ uri: item.image }}
+                style={styles.image}
+              />
+               <Image
+                source={{ uri: item.imageBack }}
                 style={styles.image}
               />
             </View>
@@ -112,12 +118,12 @@ const styles = StyleSheet.create({
 
   imageContainer: {
     backgroundColor: "#2A2A2A",
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 20,
+    marginBottom: 10,
+  
   },
 
   image: {
