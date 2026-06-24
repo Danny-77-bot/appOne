@@ -4,13 +4,22 @@ import {
   Image,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
+
+interface PokemonType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
 
 interface Pokemon {
   name: string;
   image: string;
   imageBack: string;
+  types: PokemonType[];
 }
 
 export default function Index() {
@@ -20,11 +29,16 @@ export default function Index() {
     fetchPokemon();
   }, []);
 
+  useEffect(()=>{
+    console.log(pokemon)
+  })
+
   async function fetchPokemon() {
     try {
       const response = await fetch(
         "https://pokeapi.co/api/v2/pokemon"
       );
+
       const data = await response.json();
 
       const detailedPokemon = await Promise.all(
@@ -36,6 +50,7 @@ export default function Index() {
             name: pokemon.name,
             image: details.sprites.front_default,
             imageBack: details.sprites.back_default,
+            types: details.types,
           };
         })
       );
@@ -62,7 +77,8 @@ export default function Index() {
                 source={{ uri: item.image }}
                 style={styles.image}
               />
-               <Image
+
+              <Image
                 source={{ uri: item.imageBack }}
                 style={styles.image}
               />
@@ -72,6 +88,19 @@ export default function Index() {
               {item.name.charAt(0).toUpperCase() +
                 item.name.slice(1)}
             </Text>
+
+            <View style={styles.typesContainer}>
+              {item.types.map((pokemonType) => (
+                <View
+                  key={pokemonType.slot}
+                  style={styles.typeBadge}
+                >
+                  <Text style={styles.typeText}>
+                    {pokemonType.type.name}
+                  </Text>
+                </View>
+              ))}
+            </View>
           </View>
         )}
       />
@@ -87,7 +116,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 33,
+    fontSize: 32,
     fontWeight: "bold",
     color: "#FFCB05",
     textAlign: "center",
@@ -102,7 +131,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#1E1E1E",
     borderRadius: 20,
-    padding: 30,
+    padding: 20,
     marginBottom: 16,
     alignItems: "center",
 
@@ -117,24 +146,44 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    backgroundColor: "#2A2A2A",
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
+    backgroundColor: "#2A2A2A",
     borderRadius: 20,
-    marginBottom: 10,
-  
+    padding: 10,
+    marginBottom: 12,
   },
 
   image: {
-    width: 140,
-    height: 140,
+    width: 120,
+    height: 120,
   },
 
   name: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "bold",
     color: "#FFFFFF",
-    letterSpacing: 1,
+    marginBottom: 10,
+  },
+
+  typesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginTop: 5,
+  },
+
+  typeBadge: {
+    backgroundColor: "#FFCB05",
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    margin: 4,
+  },
+
+  typeText: {
+    color: "#121212",
+    fontWeight: "bold",
+    textTransform: "capitalize",
   },
 });
