@@ -1,10 +1,10 @@
+import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   FlatList,
-  Image,
-  StyleSheet,
+  Image, Pressable, StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 
 interface PokemonType {
@@ -23,10 +23,13 @@ interface Pokemon {
 }
 
 const colorTypes: Record<string, string> = {
-  water: '#6390F0',
-  fire: '#F08030',
-  grass: '#7AC74C',
-  bug: '#A6B91A',
+  water: "#6390F0",
+  fire: "#F08030",
+  grass: "#7AC74C",
+  bug: "#A6B91A",
+  poison: "#A33EA1",
+  electric: "#F7D02C",
+  normal: "#A8A77A",
 };
 
 export default function Index() {
@@ -35,10 +38,6 @@ export default function Index() {
   useEffect(() => {
     fetchPokemon();
   }, []);
-
-  useEffect(()=>{
-    console.log(pokemon)
-  })
 
   async function fetchPokemon() {
     try {
@@ -77,39 +76,62 @@ export default function Index() {
         keyExtractor={(item) => item.name}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
-        renderItem={({ item }) => (
-          <View style={[styles.card, { backgroundColor: colorTypes[item.types[0].type.name] || 'orange' }]}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: item.image }}
-                style={styles.image}
-              />
+        renderItem={({ item }) => {
+          const primaryType = item.types[0]?.type.name;
 
-              <Image
-                source={{ uri: item.imageBack }}
-                style={styles.image}
-              />
-            </View>
+          return (
+            <Link
+              href={{
+                pathname: "/details",
+                params: {
+                  name: item.name,
+                },
+              }}
+              
+            >
+            <Pressable
+  style={[
+    styles.card,
+    {
+      width: "100%",
+      backgroundColor:
+        colorTypes[primaryType] || "#F4A261",
+    },
+  ]}
+>
+                <View style={styles.imageContainer}>
+                  <Image
+                    source={{ uri: item.image }}
+                    style={styles.image}
+                  />
 
-            <Text style={styles.name}>
-              {item.name.charAt(0).toUpperCase() +
-                item.name.slice(1)}
-            </Text>
-
-            <View style={styles.typesContainer}>
-              {item.types.map((pokemonType) => (
-                <View
-                  key={pokemonType.slot}
-                  style={styles.typeBadge}
-                >
-                  <Text style={styles.typeText}>
-                    {pokemonType.type.name}
-                  </Text>
+                  <Image
+                    source={{ uri: item.imageBack }}
+                    style={styles.image}
+                  />
                 </View>
-              ))}
-            </View>
-          </View>
-        )}
+
+                <Text style={styles.name}>
+                  {item.name.charAt(0).toUpperCase() +
+                    item.name.slice(1)}
+                </Text>
+
+                <View style={styles.typesContainer}>
+                  {item.types.map((pokemonType) => (
+                    <View
+                      key={pokemonType.slot}
+                      style={styles.typeBadge}
+                    >
+                      <Text style={styles.typeText}>
+                        {pokemonType.type.name}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              </Pressable>
+            </Link>
+          );
+        }}
       />
     </View>
   );
@@ -136,7 +158,6 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: "#1E1E1E",
     borderRadius: 20,
     padding: 20,
     marginBottom: 16,
