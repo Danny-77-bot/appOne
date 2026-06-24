@@ -22,6 +22,13 @@ interface Pokemon {
   types: PokemonType[];
 }
 
+const colorTypes: Record<string, string> = {
+  water: '#6390F0',
+  fire: '#F08030',
+  grass: '#7AC74C',
+  bug: '#A6B91A',
+};
+
 export default function Index() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
@@ -71,7 +78,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <View style={[styles.card, { backgroundColor: colorTypes[item.types[0].type.name] || 'orange' }]}>
             <View style={styles.imageContainer}>
               <Image
                 source={{ uri: item.image }}
